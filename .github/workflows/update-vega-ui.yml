@@ -16,9 +16,7 @@ jobs:
 
       - name: Upgrade vega-ui dependencies
         working-directory: "/"
-        run: |
-          yarn
-          yarn upgrade @gpn-prototypes/vega-ui
+        run: yarn upgrade @gpn-prototypes/vega-ui
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:
