@@ -17,7 +17,7 @@ jobs:
       - name: install vega-ui dependencies
         working-directory: "/"
         run: yarn
-      
+
         - name: Upgrade vega-ui dependencies
         working-directory: "/"
         run: yarn upgrade
