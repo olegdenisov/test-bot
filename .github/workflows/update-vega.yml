@@ -1,7 +1,7 @@
-name: Обновление зависимостей @csssr/e2e-tools
+name: test itself
 on:
   schedule:
-    - cron: 0 0 * * 3 # Каждую среду в 00:00
+    - cron: '*/15 * * * *' # Каждую среду в 00:00
 
 jobs:
   update:
@@ -14,13 +14,16 @@ jobs:
         with:
           node-version: "12.x"
 
-      - name: Upgrade vega-ui dependencies
+      - name: install vega-ui dependencies
         working-directory: "/"
-        run: |
-          yarn
-          yarn upgrade
+        run: yarn
+      
+        - name: Upgrade vega-ui dependencies
+        working-directory: "/"
+        run: yarn upgrade
+
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v2
+        uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: Обновление vega-ui
