@@ -1,7 +1,7 @@
 name: test itself
 on:
   schedule:
-    - cron: "*/15 * * * *" # Каждую среду в 00:00
+    - cron: "*/10 * * * *" # Каждую среду в 00:00
 
 jobs:
   update:
@@ -14,22 +14,18 @@ jobs:
         with:
           node-version: "12.x"
 
-      - name: install vega-ui dependencies
-        working-directory: "/"
-        run: yarn
+      - name: Upgrade dependencies
+        run: |
+          yarn
+          yarn et upgrade
 
-      - name: Upgrade vega-ui dependencies
-        working-directory: "/"
-        run: yarn upgrade
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+          - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3.5.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Обновление vega-ui
-          title: Обновление vega-ui
+          commit-message: Обновление зависимостей
+          title: Обновление зависимостей
           body: |
-            Описание изменений
-
+            Описание изменений:
           labels: dependencies
-          branch: upgrade-vega-ui-dependencies
+          branch: upgrade--dependencies
