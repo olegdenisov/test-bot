@@ -1,7 +1,7 @@
 name: test itself
 on:
   schedule:
-    - cron: '*/15 * * * *' # Каждую среду в 00:00
+    - cron: "*/15 * * * *" # Каждую среду в 00:00
 
 jobs:
   update:
@@ -18,7 +18,7 @@ jobs:
         working-directory: "/"
         run: yarn
 
-        - name: Upgrade vega-ui dependencies
+      - name: Upgrade vega-ui dependencies
         working-directory: "/"
         run: yarn upgrade
 
