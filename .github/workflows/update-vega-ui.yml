@@ -1,30 +1,22 @@
-name: Обновление зависимостей @csssr/e2e-tools
 on:
   schedule:
-    - cron: 0 0 * * 3 # Каждую среду в 00:00
-
+    - cron: 0 0 * * 3
+name: Update
 jobs:
-  update:
-    name: Update
+  package-update:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@master
+      - name: set remote url
+        run: git remote set-url --push origin https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+      - name: package-update
+        uses: taichi/actions-package-update@master
+        env:
+          AUTHOR_EMAIL: john@example.com
+          AUTHOR_NAME: john
+          EXECUTE: "true"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LOG_LEVEL: debug
+          UPDATE_COMMAND: yarn
         with:
-          node-version: "12.x"
-
-      - name: Upgrade vega-ui dependencies
-        working-directory: "/"
-        run: yarn upgrade @gpn-prototypes/vega-ui
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Обновление vega-ui
-          title: Обновление vega-ui
-          body: |
-            Описание изменений
-
-          labels: dependencies
-          branch: upgrade-vega-ui-dependencies
+          args: upgrade --latest
