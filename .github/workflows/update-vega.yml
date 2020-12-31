@@ -20,7 +20,7 @@ jobs:
       - name: Upgrade dependencies
         run: |
           yarn
-          yarn add react
+          yarn upgrade @gpn-prototypes/vega-ui --latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
