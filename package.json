@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@gpn-prototypes/vega-ui": "^2.15.14",
-    "react": "^16.13.1"
+    "react": "^17.0.2"
   },
   "devDependencies": {
     "@gpn-prototypes/frontend-configs": "^1.2.5"
